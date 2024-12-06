@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+double f(double x, double y) {
+    return x + y; 
+}
+
+int main() {
+    double x0, y0, xn, h, k1, k2, k3, k4, k;
+    int n;
+    printf("Enter initial x: ");
+    scanf("%lf", &x0);
+    printf("Enter initial y: ");
+    scanf("%lf", &y0);
+    printf("Enter Final x: ");
+    scanf("%lf", &xn);
+    printf("Enter number of steps: ");
+    scanf("%d", &n);
+    h = (xn - x0) / n;
+    for (int i = 0; i < n; i++) {
+        k1 = h * f(x0, y0);
+        k2 = h * f(x0 + 0.5 * h, y0 + 0.5 * k1);
+        k3 = h * f(x0 + 0.5 * h, y0 + 0.5 * k2);
+        k4 = h * f(x0 + h, y0 + k3);
+        k = (k1 + 2 * k2 + 2 * k3 + k4) / 6.0;
+        y0 = y0 + k;
+        x0 = x0 + h;
+    }
+
+    printf("Final value of y at x = %.6lf is %.6lf\n", xn, y0);
+    return 0;
+}
