@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+double f(double x) {
+    return x * x; 
+}
+
+double trapezoidal(double a, double b, int n) {
+    double h = (b - a) / n; 
+    double sum = 0.5 * (f(a) + f(b));
+    for (int i = 1; i < n; i++) {
+        sum += f(a + i * h); 
+    }
+    return sum * h;
+}
+
+int main() {
+    double a, b; 
+    int n;
+    printf("Enter the lower limit (a): ");
+    scanf("%lf", &a);    
+    printf("Enter the upper limit (b): ");
+    scanf("%lf", &b);
+    printf("Enter the number of intervals (n): ");
+    scanf("%d", &n);
+    double result = trapezoidal(a, b, n);
+    printf("The integral from %.2f to %.2f is approximately: %.6f\n", a, b, result);
+    return 0;
+}
